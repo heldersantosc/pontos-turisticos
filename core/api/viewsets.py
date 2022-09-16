@@ -6,9 +6,15 @@ from core.api.serializers import PontoTuristicoSerializer
 class PontoTuristicoViewSet(viewsets.ModelViewSet):
     serializer_class = PontoTuristicoSerializer
 
-    # sobrescreve método GET quando por id
+    # sobrescreve método GET por padrão
     def get_queryset(self):
         return PontoTuristico.objects.filter(aprovado=False)
+
+    # sobrescreve método GET quando em ID <pk>
+    def retrieve(self, request, *args, **kwargs):
+        response = PontoTuristico.objects.filter(aprovado=False).first()
+        serializer = PontoTuristicoSerializer(response)
+        return Response(serializer.data)
 
     # sobrescreve método GET quando em lista
     def list(self, request, *args, **kwargs):
