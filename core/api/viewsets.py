@@ -15,3 +15,9 @@ class PontoTuristicoViewSet(viewsets.ModelViewSet):
         response = PontoTuristico.objects.filter(aprovado=False)
         serializer = PontoTuristicoSerializer(response, many=True)
         return Response(serializer.data)
+
+    # sobrescreve método POST
+    def create(self, request, *args, **kwargs):
+        super().create(request, *args, **kwargs)
+        return Response({"msg": "Criado com sucesso"})
+        
