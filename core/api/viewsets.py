@@ -20,4 +20,8 @@ class PontoTuristicoViewSet(viewsets.ModelViewSet):
     def create(self, request, *args, **kwargs):
         super().create(request, *args, **kwargs)
         return Response({"msg": "Criado com sucesso"})
+
+    # sobrescreve método DELETE
+    def destroy(self, request, *args, **kwargs):
+        return Response({"msg": "Evitando deletar"})
         
