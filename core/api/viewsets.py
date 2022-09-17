@@ -1,7 +1,9 @@
 from rest_framework import viewsets
+from rest_framework.decorators import action
 from rest_framework.response import Response
 from core.models import PontoTuristico
 from core.api.serializers import PontoTuristicoSerializer
+
 
 class PontoTuristicoViewSet(viewsets.ModelViewSet):
     serializer_class = PontoTuristicoSerializer
@@ -30,4 +32,7 @@ class PontoTuristicoViewSet(viewsets.ModelViewSet):
     # sobrescreve método DELETE
     def destroy(self, request, *args, **kwargs):
         return Response({"msg": "Evitando deletar"})
-        
+
+    @action(methods=["post"], detail=True)
+    def denunciar(self, request, **kwargs):
+        return Response({"msg": "Denunciado: {id}".format(id=kwargs["pk"])})
