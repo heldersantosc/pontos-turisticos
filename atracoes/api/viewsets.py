@@ -7,3 +7,4 @@ class AtracaoViewSet(viewsets.ModelViewSet):
     queryset = Atracao.objects.all()
     serializer_class = AtracaoSerializer
     filterset_fields = ["nome", "descricao"]
+    lookup_field = "id"
